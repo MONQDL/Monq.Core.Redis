@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using StackExchange.Redis;
+using System;
 using System.Security.Authentication;
-using System.Text;
-using System.Threading.Tasks;
-
-using StackExchange.Redis;
 
 namespace Monq.Core.Redis.Configuration
 {

@@ -1,7 +1,6 @@
 using Microsoft.Extensions.Options;
 using Monq.Core.Redis.Configuration;
 using StackExchange.Redis;
-using System;
 
 namespace Monq.Core.Redis.RedisClient.Impl
 {
@@ -21,7 +20,8 @@ namespace Monq.Core.Redis.RedisClient.Impl
         {
             Options = optionsAccessor.Value;
 
-            var configuration = new ConfigurationOptions { 
+            var configuration = new ConfigurationOptions
+            {
                 Password = Options.Password,
             };
 

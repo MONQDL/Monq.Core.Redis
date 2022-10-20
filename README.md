@@ -1,12 +1,18 @@
 # Monq.Core.Redis
 
-### Dependency Injection Extensions
+## Installation
 
-Set connection with `Redis` from `appsettings.json`. Allow inject `IRedisConnectionFactory`. 
+```powershell
+Install-Package Monq.Core.Redis
+```
 
-**Пример**\
+## Using the library
+
+The library allows you create and configure Redis connection.
+
+##### An example of using a configuration file
+
 `appsettings.json`.
-
 ```json
   "Redis": {
     "EndPoints": [ // The endpoints defined for this configuration.
@@ -47,6 +53,22 @@ Set connection with `Redis` from `appsettings.json`. Allow inject `IRedisConnect
   },
 ```
 
+*Startup.cs - ASP.NET Core application*
+
+```
+public class Startup
+{
+    public void ConfigureServices(IServiceCollection services)
+    {
+        ...
+        services.AddRedisClient(Configuration.GetSection(Redis));
+        ...
+    }
+}
+```
+
+Set connection with `Redis` from `appsettings.json`. Allow inject `IRedisConnectionFactory`.
+
 `startup.cs`.
 
 ```csharp
@@ -58,7 +80,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-`controller`.
+Use in controller.
 
 ```csharp
 public class CacheService : RedisClientBase

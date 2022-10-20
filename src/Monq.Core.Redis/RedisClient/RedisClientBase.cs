@@ -2,11 +2,6 @@
 using Microsoft.Extensions.Hosting;
 using Monq.Core.Redis.Configuration;
 using StackExchange.Redis;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Monq.Core.Redis.RedisClient
 {
@@ -17,7 +12,7 @@ namespace Monq.Core.Redis.RedisClient
         protected string KeyPrefix { get; private set; }
         protected RedisOptions Options => _connectionFactory.Options;
         protected IDatabase Db { get; private set; }
-        
+
         public IConnectionMultiplexer Connection { get; private set; }
 
         public RedisClientBase(IRedisConnectionFactory connectionFactory, IHostEnvironment env, IConfiguration configuration)
