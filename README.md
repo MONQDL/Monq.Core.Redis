@@ -80,14 +80,42 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
+Declare function in CacheService.
+
+```csharp
+public class WeatherCacheService : RedisClientBase
+{
+    public WeatherCacheService(IRedisConnectionFactory connectionFactory, IHostEnvironment env, IConfiguration configuration) 
+        : base(connectionFactory, env, configuration)
+    {
+        ...
+    }
+
+    public string GetWeatherDescription()
+    {
+        return Db.HashGet(KeyPrefix + "description", "test").ToString();
+    }
+}
+```
+
 Use in controller.
 
 ```csharp
-public class CacheService : RedisClientBase
+[ApiController]
+[Route("[controller]")]
+public class WeatherForecastController : ControllerBase
 {
-    public CacheService(IRedisConnectionFactory connectionFactory, IHostEnvironment env, IConfiguration configuration) 
-        : base(connectionFactory, env, configuration)
+    readonly WeatherCacheService _weatherCacheService;
+
+    public WeatherForecastController(ILogger<WeatherForecastController> logger, WeatherCacheService weatherCacheService)
     {
+        _weatherCacheService = weatherCacheService;
+    }
+
+    [HttpGet("GetWeatherForecast")]
+    public IEnumerable<WeatherForecast> Get()
+    {
+        var description = _weatherCacheService.GetWeatherDescription();
         ...
     }
 }
