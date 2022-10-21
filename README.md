@@ -53,20 +53,6 @@ The library allows you create and configure Redis connection.
   },
 ```
 
-*Startup.cs - ASP.NET Core application*
-
-```
-public class Startup
-{
-    public void ConfigureServices(IServiceCollection services)
-    {
-        ...
-        services.AddRedisClient(Configuration.GetSection(Redis));
-        ...
-    }
-}
-```
-
 Set connection with `Redis` from `appsettings.json`. Allow inject `IRedisConnectionFactory`.
 
 `startup.cs`.
