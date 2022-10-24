@@ -7,15 +7,15 @@ using Monq.Core.Redis.RedisClient.Impl;
 namespace Monq.Core.Redis.Extentions
 {
     /// <summary>
-    /// Расширения для удобства внедрения средствами DI.
+    /// Extensions for easy implementation with DI tools.
     /// </summary>
     public static class DependencyInjectionExtensions
     {
         /// <summary>
-        /// Добавить реализации сервисов для взаимодействия и кэширования в Redis.
+        /// Add service implementations for communication and caching in Redis.
         /// </summary>
-        /// <param name="services">Контейнер внедрения зависимостей.</param>
-        /// <param name="configuration">Секция конфигурации <see cref="RedisOptions"/>.</param>
+        /// <param name="services">Dependencies injection container.</param>
+        /// <param name="configuration">Configuration section <see cref="RedisOptions"/>.</param>
         /// <returns></returns>
         public static IServiceCollection AddRedisClient(this IServiceCollection services, IConfiguration configuration)
         {

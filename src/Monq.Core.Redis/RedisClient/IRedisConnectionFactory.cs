@@ -4,12 +4,12 @@ using StackExchange.Redis;
 namespace Monq.Core.Redis.RedisClient
 {
     /// <summary>
-    /// Создание подключения к Redis.
+    /// Connect to Redis.
     /// </summary>
     public interface IRedisConnectionFactory
     {
         /// <summary>
-        /// Подключиться к Redis.
+        /// Connect to Redis.
         /// </summary>
         /// <returns></returns>
         IConnectionMultiplexer Connection();

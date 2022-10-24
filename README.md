@@ -27,7 +27,6 @@ The library allows you create and configure Redis connection.
     ], 
     "Password": "password", // The password for the redis server.
     "DbNum": 1 // Database number.
-    "UseTwemproxy": false, // Use Twemproxy.
     "AbortOnConnectFail": false, // If true, Connect will not create a connection while no servers are available.
     "AllowAdmin": false, // Enables a range of commands that are considered risky.
     "ChannelPrefix": null, // Optional channel prefix for all pub/sub operations.
@@ -53,19 +52,6 @@ The library allows you create and configure Redis connection.
   },
 ```
 
-Set connection with `Redis` from `appsettings.json`. Allow inject `IRedisConnectionFactory`.
-
-`startup.cs`.
-
-```csharp
-public void ConfigureServices(IServiceCollection services)
-{
-    ...
-    services.AddRedisClient(Configuration.GetSection(Redis));
-    ...
-}
-```
-
 Declare function in CacheService.
 
 ```csharp
@@ -81,6 +67,20 @@ public class WeatherCacheService : RedisClientBase
     {
         return Db.HashGet(KeyPrefix + "description", "test").ToString();
     }
+}
+```
+
+Set connection with `Redis` from `appsettings.json`. Allow inject `IRedisConnectionFactory`.
+
+`startup.cs`.
+
+```csharp
+public void ConfigureServices(IServiceCollection services)
+{
+    ...
+    services.AddRedisClient(Configuration.GetSection(Redis));
+    services.AddTransient<CacheService>();
+    ...
 }
 ```
 

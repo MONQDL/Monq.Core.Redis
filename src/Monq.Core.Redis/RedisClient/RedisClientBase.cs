@@ -5,6 +5,9 @@ using StackExchange.Redis;
 
 namespace Monq.Core.Redis.RedisClient
 {
+    /// <summary>
+    /// Realization <see cref="IRedisClient"/>, which contains are methods for interacting with Redis.
+    /// </summary>
     public abstract class RedisClientBase : IRedisClient
     {
         readonly IRedisConnectionFactory _connectionFactory;

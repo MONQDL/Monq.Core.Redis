@@ -4,6 +4,9 @@ using System.Security.Authentication;
 
 namespace Monq.Core.Redis.Configuration
 {
+    /// <summary>
+    /// Redis parameters.
+    /// </summary>
     public class RedisOptions
     {
         public EndPoint[] EndPoints { get; set; } = Array.Empty<EndPoint>();
@@ -62,6 +65,12 @@ namespace Monq.Core.Redis.Configuration
         /// User for the redis server (for use with ACLs on redis 6 and above).
         /// </summary>
         public string? User { get; set; }
+
+        /// <summary>
+        /// Auth contains password for the redis server.
+        /// </summary>
+        [Obsolete("This method is deprecated. Use 'Password' property.")]
+        public string? Auth { get; set; }
 
         /// <summary>
         /// The password for the redis server.
