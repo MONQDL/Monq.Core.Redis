@@ -79,7 +79,7 @@ public void ConfigureServices(IServiceCollection services)
 {
     ...
     services.AddRedisClient(Configuration.GetSection(Redis));
-    services.AddTransient<CacheService>();
+    services.AddTransient<WeatherCacheService>();
     ...
 }
 ```
