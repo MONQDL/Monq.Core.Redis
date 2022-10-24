@@ -1,6 +1,8 @@
 using Microsoft.Extensions.Options;
 using Monq.Core.Redis.Configuration;
+using Monq.Core.Redis.Exceptions;
 using StackExchange.Redis;
+using System;
 
 namespace Monq.Core.Redis.RedisClient.Impl
 {
@@ -18,6 +20,9 @@ namespace Monq.Core.Redis.RedisClient.Impl
         /// <param name="optionsAccessor">The options accessors.</param>
         public RedisConnectionFactory(IOptions<RedisOptions> optionsAccessor)
         {
+            if (optionsAccessor?.Value == null)
+                throw new ConfigurationException("Can't read configuration from JSON");
+
             Options = optionsAccessor.Value;
 
             var configuration = new ConfigurationOptions

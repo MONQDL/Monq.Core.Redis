@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Hosting;
 using Monq.Core.Redis.Configuration;
 using StackExchange.Redis;
+using System;
 
 namespace Monq.Core.Redis.RedisClient
 {
@@ -20,7 +21,10 @@ namespace Monq.Core.Redis.RedisClient
 
         public RedisClientBase(IRedisConnectionFactory connectionFactory, IHostEnvironment env, IConfiguration configuration)
         {
-            _connectionFactory = connectionFactory;
+            if (env == null)
+                throw new ArgumentNullException(nameof(env), $"{nameof(env)} is null.");
+
+            _connectionFactory = connectionFactory ?? throw new ArgumentNullException(nameof(connectionFactory), $"{nameof(connectionFactory)} is null.");
             Connection = connectionFactory.Connection();
 
             var applicationName = configuration[AppConstants.ApplicationName];
