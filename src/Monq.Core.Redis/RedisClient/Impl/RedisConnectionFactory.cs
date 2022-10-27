@@ -2,7 +2,6 @@ using Microsoft.Extensions.Options;
 using Monq.Core.Redis.Configuration;
 using Monq.Core.Redis.Exceptions;
 using StackExchange.Redis;
-using System;
 
 namespace Monq.Core.Redis.RedisClient.Impl
 {
@@ -86,6 +85,9 @@ namespace Monq.Core.Redis.RedisClient.Impl
 
             if (Options.TieBreaker is not null)
                 configuration.TieBreaker = Options.TieBreaker;
+
+            if (Options.ServiceName is not null)
+                configuration.ServiceName = Options.ServiceName;
 
             if (Options.CheckCertificateRevocation is not null)
                 configuration.CheckCertificateRevocation = Options.CheckCertificateRevocation.Value;
