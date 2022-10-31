@@ -1,15 +1,14 @@
 ﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using Monq.Core.Redis.Configuration;
 using Monq.Core.Redis.RedisClient;
 using Monq.Core.Redis.RedisClient.Impl;
 
-namespace Monq.Core.Redis.Extentions
+namespace Microsoft.Extensions.DependencyInjection
 {
     /// <summary>
     /// Extensions for easy implementation with DI tools.
     /// </summary>
-    public static class DependencyInjectionExtensions
+    public static class ServiceCollectionExtensions
     {
         /// <summary>
         /// Add service implementations for communication and caching in Redis.
@@ -26,5 +25,4 @@ namespace Monq.Core.Redis.Extentions
             return services;
         }
     }
-
 }

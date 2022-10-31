@@ -1,4 +1,3 @@
-using Monq.Core.Redis.Extentions;
 using Monq.Core.Redis.WebApp;
 
 var builder = WebApplication.CreateBuilder(args);
