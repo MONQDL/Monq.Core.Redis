@@ -37,12 +37,12 @@ The library allows you create and configure Redis connection.
     "DefaultDatabase": null, // Default database index, from 0 to databases - 1.
     "KeepAlive": -1, // Time (seconds) at which to send a message to help keep sockets alive (60 sec default).
     "User": null, // User for the redis server (for use with ACLs on redis 6 and above).
-    "Proxy": Proxy.None, // Type of proxy in use (if any); for example “twemproxy/envoyproxy”.
+    "Proxy": Proxy.None, // Type of proxy in use (if any); for example "twemproxy/envoyproxy".
     "ResolveDns": false, // Specifies that DNS resolution should be explicit and eager, rather than implicit.
     "ServiceName": null, // Used for connecting to a sentinel primary service.
     "Ssl": false, // Specifies that SSL encryption should be used.
-    "SslHost": null, // Enforces a particular SSL host identity on the server’s certificate.
-    "SslProtocols": null, // Ssl/Tls versions supported when using an encrypted connection. Use ‘|’ to provide multiple values..
+    "SslHost": null, // Enforces a particular SSL host identity on the server's certificate.
+    "SslProtocols": null, // Ssl/Tls versions supported when using an encrypted connection. Use ',' to provide multiple values. For example: "SslProtocols": "Ssl2,Ssl3"
     "AsyncTimeout": 0, // Time (ms) to allow for asynchronous operations.
     "SyncTimeout": 0, // Time (ms) to allow for synchronous operations.
     "TieBreaker": "", // Key to use for selecting a server in an ambiguous primary scenario.

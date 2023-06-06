@@ -1,6 +1,7 @@
 ﻿using StackExchange.Redis;
 using System;
 using System.Security.Authentication;
+using System.Text.Json.Serialization;
 
 namespace Monq.Core.Redis.Configuration
 {
@@ -9,6 +10,9 @@ namespace Monq.Core.Redis.Configuration
     /// </summary>
     public class RedisOptions
     {
+        /// <summary>
+        /// The Redis servers or sentinel endpoints the client will connect to.
+        /// </summary>
         public EndPoint[] EndPoints { get; set; } = Array.Empty<EndPoint>();
 
         /// <summary>
@@ -37,7 +41,8 @@ namespace Monq.Core.Redis.Configuration
         public string? ClientName { get; set; }
 
         /// <summary>
-        /// Time (seconds) to check configuration. This serves as a keep-alive for interactive sockets, if it is supported.
+        /// Time (seconds) to check configuration. 
+        /// This serves as a keep-alive for interactive sockets, if it is supported.
         /// </summary>
         public int? ConfigCheckSeconds { get; set; }
 
@@ -75,7 +80,7 @@ namespace Monq.Core.Redis.Configuration
         /// <summary>
         /// The password for the redis server.
         /// </summary>
-        public string Password { get; set; }
+        public string? Password { get; set; }
 
         /// <summary>
         /// Type of proxy in use (if any); for example “twemproxy/envoyproxy”.
@@ -105,6 +110,7 @@ namespace Monq.Core.Redis.Configuration
         /// <summary>
         /// Ssl/Tls versions supported when using an encrypted connection. Use ‘|’ to provide multiple values..
         /// </summary>
+        [JsonConverter(typeof(JsonStringEnumConverter))]
         public SslProtocols? SslProtocols { get; set; }
 
         /// <summary>
@@ -143,7 +149,7 @@ namespace Monq.Core.Redis.Configuration
         /// <summary>
         /// Host.
         /// </summary>
-        public string Host { get; set; }
+        public string Host { get; set; } = default!;
 
         /// <summary>
         /// Port.
