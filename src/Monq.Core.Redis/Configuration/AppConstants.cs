@@ -1,7 +1,6 @@
-namespace Monq.Core.Redis.Configuration
+namespace Monq.Core.Redis.Configuration;
+
+internal static class AppConstants
 {
-    internal class AppConstants
-    {
-        public const string ApplicationName = "APPLICATION_NAME";
-    }
+    public const string ApplicationName = "APPLICATION_NAME";
 }
