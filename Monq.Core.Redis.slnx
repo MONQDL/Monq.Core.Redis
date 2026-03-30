@@ -1,0 +1,14 @@
+<Solution>
+  <Folder Name="/samples/">
+    <Project Path="samples/Monq.Core.Redis.WebApp/Monq.Core.Redis.WebApp.csproj" />
+  </Folder>
+  <Folder Name="/Solution Items/">
+    <File Path=".github/workflows/netcorelibrary.yml" />
+    <File Path="LICENSE" />
+    <File Path="README.md" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src/Monq.Core.Redis.Tests/Monq.Core.Redis.Tests.csproj" />
+    <Project Path="src/Monq.Core.Redis/Monq.Core.Redis.csproj" />
+  </Folder>
+</Solution>
