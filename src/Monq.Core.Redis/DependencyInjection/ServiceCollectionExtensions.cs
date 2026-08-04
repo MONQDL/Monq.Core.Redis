@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using Monq.Core.Redis.Configuration;
 using Monq.Core.Redis.RedisClient;
 using Monq.Core.Redis.RedisClient.Impl;
+using StackExchange.Redis;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
@@ -22,6 +23,7 @@ public static class ServiceCollectionExtensions
         services.Configure<RedisOptions>(configuration);
 
         services.TryAddSingleton<IRedisConnectionFactory, RedisConnectionFactory>();
+        services.TryAddSingleton<IConnectionMultiplexer>(sp => sp.GetRequiredService<IRedisConnectionFactory>().Connection());
 
         return services;
     }
