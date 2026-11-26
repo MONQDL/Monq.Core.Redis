@@ -20,20 +20,22 @@ dotnet publish samples/OptionsSmoke -c Release -r win-x64 -p:RedisQualificationV
 ./artifacts/smoke-win/OptionsSmoke.exe
 ```
 
-On a Linux x64 host with the .NET 10 SDK and Native AOT prerequisites, use the
-same checkout and local feed (absolute paths), with a separate cache/output:
+On a Linux x64 host with the .NET 10 SDK and Native AOT prerequisites, copy the
+tracked fixture sources into a clean temporary directory. This avoids sharing
+Windows and Linux intermediate files. Point at the same packed artifact feed:
 
 ```sh
-source=$(git rev-parse --short=12 HEAD)
-dotnet publish samples/OptionsSmoke -c Release -r linux-x64 \
-  -p:RedisQualificationVersion=2.2.0-local-$source \
-  -p:RestoreAdditionalProjectSources="$PWD/artifacts/feed" \
-  -p:RestorePackagesPath="$PWD/artifacts/packages-linux" \
-  -p:BaseIntermediateOutputPath="$PWD/artifacts/obj-linux/" \
-  -o artifacts/smoke-linux
-./artifacts/smoke-linux/OptionsSmoke
+repo=$PWD
+revision=$(git rev-parse --short=12 HEAD)
+fixture=$(mktemp -d)
+cp samples/OptionsSmoke/*.cs samples/OptionsSmoke/*.csproj "$fixture/"
+cd "$fixture"
+dotnet publish -c Release -r linux-x64 \
+  -p:RedisQualificationVersion=2.2.0-local-$revision \
+  -p:RestoreAdditionalProjectSources="$repo/artifacts/feed" \
+  -p:RestorePackagesPath="$fixture/packages" -o publish
+./publish/OptionsSmoke
 ```
-
 Do not publish the fixture package or install it as released 2.2.0. An accepted
 official version/channel and integration approval are required before merging a
 branch that triggers package publication. The existing workflow runs on pushes to
