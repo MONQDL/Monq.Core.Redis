@@ -33,7 +33,7 @@ public class RedisOptions
     /// <summary>
     /// Optional channel prefix for all pub/sub operations.
     /// </summary>
-    public RedisChannel? ChannelPrefix { get; set; }
+    public string? ChannelPrefix { get; set; }
 
     /// <summary>
     /// Identification for the connection within redis.
@@ -139,9 +139,9 @@ public class RedisOptions
     public string? KeyPrefix { get; set; }
 
     /// <summary>
-    /// Database number.
+    /// Database number. The default -1 delegates to DefaultDatabase (or the client's default).
     /// </summary>
-    public int? DbNum { get; set; } = 0;
+    public int? DbNum { get; set; } = -1;
 }
 
 /// <summary>

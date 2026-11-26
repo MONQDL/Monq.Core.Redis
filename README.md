@@ -180,7 +180,7 @@ public class WeatherForecastController : ControllerBase
 |----------|------|-------------|
 | `EndPoints` | Array | Redis server endpoints (host and port) |
 | `Password` | string | Authentication password |
-| `DbNum` | int | Database number (0-15) |
+| `DbNum` | nullable int | Explicit database number; -1 (the default) or null delegates to the client default database |
 | `AbortOnConnectFail` | bool | If true, fails immediately when no servers are available |
 | `AllowAdmin` | bool | Enables administrative commands |
 | `ClientName` | string | Connection identifier in Redis |
@@ -353,6 +353,26 @@ Db.StringSet(":mykey", value);
 ```
 
 ## Migration Guide
+
+### Unreleased configuration changes
+
+`RedisOptions.ChannelPrefix` is now `string?` instead of `RedisChannel?`. JSON configuration
+continues to use a string. The wrapper converts a non-null value with
+`RedisChannel.Literal`, preserving whitespace, Unicode, empty strings and wildcard
+characters without pattern interpretation. Missing/null leaves the client prefix unset.
+This public API change requires programmatic callers assigning a `RedisChannel` to
+update their source; source/binary compatibility is not guaranteed.
+
+`DbNum` now initializes to `-1`, retaining its nullable type and the runtime
+`GetDatabase(DbNum ?? -1)` behavior. Omission therefore honors `DefaultDatabase`,
+or the client's default database (normally 0). Set `DbNum: 0` explicitly to retain
+forced DB 0 when `DefaultDatabase` is nonzero. Explicit nonnegative values remain
+authoritative; no fixed 0..15 ceiling is imposed by this wrapper. `DefaultDatabase`
+and `DbNum` remain separate settings. This initializer change does not repair every
+configuration-binder null/overlay scenario. Explicit JSON null handling depends on
+the binder/runtime; an actual options value of null delegates through `?? -1`.
+
+See [offline package/native qualification](samples/OptionsSmoke/README.md).
 
 ### From Direct StackExchange.Redis Usage
 
