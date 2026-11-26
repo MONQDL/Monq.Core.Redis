@@ -16,7 +16,7 @@ $source = git rev-parse --short=12 HEAD
 $suffix = "local-$source"
 dotnet test src/Monq.Core.Redis.Tests -c Release
 dotnet pack src/Monq.Core.Redis -c Release -p:VersionSuffix=$suffix -o artifacts/feed
-dotnet publish samples/OptionsSmoke -c Release -r win-x64 -p:RedisQualificationVersion=2.2.0-$suffix -p:RestoreAdditionalProjectSources="$PWD/artifacts/feed" -p:RestorePackagesPath="$PWD/artifacts/packages-win" -o artifacts/smoke-win
+dotnet publish samples/OptionsSmoke -c Release -r win-x64 -p:RedisQualificationVersion=2.2.1-$suffix -p:RestoreAdditionalProjectSources="$PWD/artifacts/feed" -p:RestorePackagesPath="$PWD/artifacts/packages-win" -o artifacts/smoke-win
 ./artifacts/smoke-win/OptionsSmoke.exe
 ```
 
@@ -31,7 +31,7 @@ fixture=$(mktemp -d)
 cp samples/OptionsSmoke/*.cs samples/OptionsSmoke/*.csproj "$fixture/"
 cd "$fixture"
 dotnet publish -c Release -r linux-x64 \
-  -p:RedisQualificationVersion=2.2.0-local-$revision \
+  -p:RedisQualificationVersion=2.2.1-local-$revision \
   -p:RestoreAdditionalProjectSources="$repo/artifacts/feed" \
   -p:RestorePackagesPath="$fixture/packages" -o publish
 ./publish/OptionsSmoke
