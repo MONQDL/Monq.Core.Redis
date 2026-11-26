@@ -61,7 +61,7 @@ public static class OptionExtensions
             configuration.ConnectTimeout = options.ConnectTimeout.Value;
 
         if (options.ChannelPrefix is not null)
-            configuration.ChannelPrefix = options.ChannelPrefix.Value;
+            configuration.ChannelPrefix = RedisChannel.Literal(options.ChannelPrefix);
 
         if (options.ClientName is not null)
             configuration.ClientName = options.ClientName;
